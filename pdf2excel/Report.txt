@@ -1,0 +1,97 @@
+# PDF to Excel Converter
+
+## Overview
+This Python script extracts transaction details from a bank statement PDF and converts them into an Excel file. It uses `pdfplumber` for text extraction and `pandas` for data structuring. The script is designed to handle a variety of transaction formats and provides a clean, structured output for easy analysis. By automating the extraction process, it helps in reducing manual work and improving data accuracy.
+
+## Features
+- **Automated Data Extraction**: Extracts transaction details such as date, description, amount, balance, and transaction type with minimal manual intervention.
+- **Data Cleaning & Formatting**: Formats and cleans transaction descriptions to remove unwanted characters and standardize text.
+- **Transaction Classification**: Automatically detects transaction types (Credit or Debit) based on keywords, ensuring clarity in financial records.
+- **Excel Export**: Saves structured data into an Excel file for easy review, reporting, and analysis.
+- **Multi-page Support**: Processes large bank statements spanning multiple pages seamlessly.
+- **Robust Error Handling**: Handles missing data, unexpected formats, and inconsistencies gracefully.
+
+## Requirements
+Ensure you have Python installed along with the following dependencies:
+```sh
+pip install pdfplumber pandas openpyxl
+```
+
+## Installation and Setup
+1. Clone or download this repository.
+2. Install the required dependencies using the command above.
+3. Place the PDF file in the project directory.
+
+## Usage
+Run the script with the PDF file as input:
+```sh
+python main.py
+```
+### Command-line Arguments
+The script supports command-line arguments for specifying input and output file paths:
+```sh
+python main.py input.pdf output.xlsx
+```
+If no arguments are provided, it defaults to `statement.pdf` and `extracted_statement.xlsx`.
+
+## Script Logic
+1. **Opening the PDF**: The script loads the PDF file using `pdfplumber` and reads all pages.
+2. **Text Extraction**: Extracts text line by line and processes transactions based on predefined patterns.
+3. **Transaction Identification**: Recognizes valid transaction entries using date formats and amount patterns.
+4. **Description Cleaning**: Removes unnecessary characters, spaces, and standardizes descriptions for clarity.
+5. **Transaction Classification**: Categorizes transactions as either Credit or Debit based on specific keywords.
+6. **Data Structuring**: Stores extracted data in a structured format suitable for exporting to Excel.
+7. **Excel Export**: Saves the cleaned and structured data into an Excel file for further analysis.
+
+## Output Format
+The script generates an Excel file with the following columns:
+- **Date**: Transaction date extracted from the PDF.
+- **Description**: Processed transaction details with standardized formatting.
+- **Amount**: Transaction amount extracted from the statement.
+- **Balance**: Updated account balance after the transaction.
+- **Transaction Type**: Identified as either Credit or Debit based on keywords.
+
+### Example Output
+| Date       | Description       | Amount  | Balance  | Transaction Type |
+|------------|------------------|---------|----------|------------------|
+| 12-Jan-2024 | BY CASH Deposit  | 5000.00 | 15000.00 | Credit          |
+| 15-Jan-2024 | NEFT Transfer    | 2500.00 | 12500.00 | Debit           |
+
+## Error Handling
+- **File Not Found**: Displays an error if the specified PDF file is missing.
+- **Empty File Handling**: If no transactions are found, an appropriate message is displayed instead of generating an empty Excel file.
+- **Format Validation**: Ensures that extracted data adheres to expected structures.
+- **Logging Mechanism**: Prints logs to the console for troubleshooting.
+
+## Customization
+The script can be easily modified to support different bank statement formats:
+- **Keyword List**: Modify the `keywords` list to include additional transaction identifiers.
+- **Date Format Handling**: Adjust the regex patterns to support different date formats as needed.
+- **Output Structure**: Modify the script to add or remove columns based on specific requirements.
+
+## Performance Considerations
+- The script is optimized for efficiency, capable of processing large multi-page PDFs quickly.
+- Uses regex-based parsing for fast and accurate extraction, minimizing manual correction efforts.
+- Designed to handle various text alignments and spacing issues in bank statements.
+
+## Future Enhancements
+Planned improvements for future versions include:
+- **OCR Integration**: Add support for scanned PDFs using Optical Character Recognition (OCR).
+- **Enhanced Transaction Classification**: Improve categorization of transactions with machine learning-based classification.
+- **Additional Export Formats**: Provide support for CSV and JSON exports.
+- **Graphical User Interface (GUI)**: Develop a user-friendly interface for easier interaction.
+- **Advanced Filtering**: Allow users to filter transactions by date range, amount, or transaction type before exporting.
+
+## Use Cases
+This script is useful for:
+- **Individuals**: Managing personal finances by extracting and analyzing bank transactions.
+- **Small Businesses**: Automating bookkeeping and expense tracking from bank statements.
+- **Financial Analysts**: Extracting structured data for deeper analysis and insights.
+- **Developers**: Integrating PDF-to-Excel conversion into financial applications.
+
+## Conclusion
+The PDF to Excel Converter simplifies the process of extracting bank transactions from PDFs, reducing manual data entry and improving efficiency. It provides a structured and well-formatted output that can be further analyzed for financial tracking and reporting.
+
+## License
+This project is open-source and free to use. Feel free to contribute or modify as needed to suit your requirements.
+
